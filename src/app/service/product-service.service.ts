@@ -573,10 +573,10 @@ export class ProductServiceService {
     },
     {
        "id":48,
-       "catId":1,
-       "name":"Merci papa, merci maman",
+       "catId":2,
+       "name":"Denver, az utolsó dinoszaurusz",
        "description":"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, numquam sunt obcaecati quas minus deserunt excepturi eum perferendis earum quo ducimus officia. Odio itaque officia aspernatur aut a fuga cum? ",
-       "image":"https://www.mafab.hu/img/icon_kino_default.jpg",
+       "image":"https://www.mafab.hu/static/2017/249/20/213977_1504808330.7446.jpg",
        "price":6574,
        "stock":20,
        "featured":true,
