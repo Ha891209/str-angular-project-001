@@ -1,1 +1,16 @@
-<p>cat01 works!</p>
+<h1 class="text-center mb-4 mt-5">Filmek</h1>      
+<h2 class="text-center mb-5 mt-5">Kiemelt termékek</h2>
+<div class="featured-product-container">
+  <app-product-card [product]="product" *ngFor="let product of featuredList"></app-product-card>
+</div>
+<hr>
+<h2 class="text-center mb-5 mt-5">Összes termék</h2>
+<div class="search-bar">
+  <form class="form-inline my-2 my-lg-0 d-flex justify-content-center">
+    <input (keyup)='onChangePhrase($event)' class="form-control mr-sm-2" type="text" placeholder="Keresés" >
+    <button class="btn btn-primary mt-4 my-sm-0" type="submit">Keresés</button>
+  </form>
+</div>
+<div class="all-product-container">
+  <app-product-card [product]="product" [phraseString]="phrase" *ngFor="let product of filmList | filter:phraseString:'name'"></app-product-card>
+</div>
