@@ -15,7 +15,9 @@ export class ProductListFeaturedFilmComponent implements OnInit {
   featuredList: Product[] = [...this.ProductServiceService.list]
     .filter(item => { return item.featured === true && item.catId === 1});
   
-  fiveFeaturedFilms: Product[] = this.featuredList.slice(0, 5);
+  fiveFeaturedFilms: Product[] = this.featuredList
+    .sort( () => 0.5 - Math.random())
+    .slice(0, 5);
 
   constructor(private ProductServiceService: ProductServiceService) { }
 
