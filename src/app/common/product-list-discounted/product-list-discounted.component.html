@@ -1,0 +1,3 @@
+<div class="discounted-product-container">
+  <app-product-card [product]="product" [phraseString]="phrase" *ngFor="let product of fiveDiscountedFilms | filter:phraseString:'name'"></app-product-card>
+</div>
