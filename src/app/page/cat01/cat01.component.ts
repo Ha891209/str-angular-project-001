@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Product } from 'src/app/model/product';
+import { ProductServiceService } from '../../service/product-service.service';
 
 @Component({
   selector: 'app-cat01',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Cat01Component implements OnInit {
 
-  constructor() { }
+  @Input() phraseString: string = '';
 
-  ngOnInit(): void {
-  }
+  constructor(private ProductServiceService: ProductServiceService) { }
+
+  ngOnInit(): void { }
 
 }
