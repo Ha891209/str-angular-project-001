@@ -14,6 +14,7 @@ import { ProductListFeaturedCartoonComponent } from './common/product-list-featu
 import { ProductListFeaturedFilmComponent } from './common/product-list-featured-films/product-list-featured-films.component';
 import { ProductListAllFilmsComponent } from './common/product-list-all-films/product-list-all-films.component';
 import { ProductListAllCartoonsComponent } from './common/product-list-all-cartoons/product-list-all-cartoons.component';
+import { ProductListDiscountedComponent } from './common/product-list-discounted/product-list-discounted.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProductListAllCartoonsComponent } from './common/product-list-all-carto
     ProductListFeaturedFilmComponent,
     ProductListAllFilmsComponent,
     ProductListAllCartoonsComponent,
+    ProductListDiscountedComponent,
   ],
   imports: [
     BrowserModule,
