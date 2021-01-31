@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Product } from 'src/app/model/product';
+import { ProductServiceService } from '../../service/product-service.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,3 +16,5 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
+
