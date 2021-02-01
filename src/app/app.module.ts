@@ -9,7 +9,6 @@ import { Cat02Component } from './page/cat02/cat02.component';
 import { HomeComponent } from './page/home/home.component';
 import { ProductCardComponent } from './common/product-card/product-card.component';
 import { FilterPipe } from './pipe/filter.pipe';
-import { SearchBarComponent } from './common/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,6 @@ import { SearchBarComponent } from './common/search-bar/search-bar.component';
     HomeComponent,
     ProductCardComponent,
     FilterPipe,
-    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
