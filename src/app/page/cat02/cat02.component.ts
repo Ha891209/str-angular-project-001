@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/model/product';
+import { ProductServiceService } from 'src/app/service/product-service.service';
 
 @Component({
   selector: 'app-cat02',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Cat02Component implements OnInit {
 
-  constructor() { }
+  featuredCartoonsList: Product[] = this.ProductServiceService.featuredCartoonsList
+    .sort(index => Math.random() - 0.5)
+    .slice(0, 5);
+
+  cartoonList: Product[] = this.ProductServiceService.cartoonList;
+
+  constructor(private ProductServiceService: ProductServiceService) { }
 
   ngOnInit(): void {
   }
