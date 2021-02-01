@@ -11,13 +11,21 @@ export class Cat01Component implements OnInit {
 
   @Input() phraseString: string = '';
 
+  phrase: string = '';
+
+  filmList: Product[] = this.ProductServiceService.filmList;
+  filmListVisible: Product[] = [...this.filmList];
+
   featuredFilmsList: Product[] = this.ProductServiceService.featuredFilmsList
     .sort(index => Math.random() - 0.5)
     .slice(0, 5);
 
-  filmList: Product[] = this.ProductServiceService.filmList;
-
   constructor(private ProductServiceService: ProductServiceService) { }
+
+  onChangePhrase(event: Event): void {
+    this.phrase = (event.target as HTMLInputElement).value;
+    this.filmListVisible = this.filmList.filter(item => item.name.toLowerCase().indexOf(this.phrase.toLowerCase()) > -1);
+  }
 
   ngOnInit(): void { }
 

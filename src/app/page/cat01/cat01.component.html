@@ -1,6 +1,5 @@
 <h1 class="text-center mb-4 mt-5">Filmek</h1>      
 <h2 class="text-center mb-5 mt-5">Kiemelt termékek</h2>
-
 <div class="all-product-container">
   <p *ngFor="let product of featuredFilmsList">
     <app-product-card [product]="product"></app-product-card>
@@ -10,10 +9,16 @@
 <hr>
 
 <h2 class="text-center mb-5 mt-5">Összes termék</h2>
-<app-search-bar></app-search-bar>
+
+<div class="search-bar">
+  <form class="form-inline my-2 my-lg-0 d-flex justify-content-center">
+    <input (keyup)='onChangePhrase($event)' class="form-control mr-sm-2" type="text" placeholder="Keresés" >
+    <button class="btn btn-primary mt-4 my-sm-0" type="button"> <i class="fa fa-search"></i> Keresés</button>
+  </form>
+</div>
 
 <div class="all-product-container">
-  <p *ngFor="let product of filmList | filter:phraseString:'name'">
+  <p *ngFor="let product of filmListVisible">
     <app-product-card [product]="product"></app-product-card>
   </p>
 </div>
