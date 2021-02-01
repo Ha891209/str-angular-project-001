@@ -1,9 +1,17 @@
 <h1>Üdvözöljük filmes webshopunkban!</h1>
 
 <h2>Kiemelt termékek</h2>
-<app-product-list-featured-films></app-product-list-featured-films>
+<div class="all-product-container">
+  <p *ngFor="let product of featuredFilmsList">
+    <app-product-card [product]="product"></app-product-card>
+  </p>
+</div>
 
 <hr>
 
 <h2>Akciós termékek</h2>
-<app-product-list-discounted></app-product-list-discounted>
+<div class="all-product-container">
+  <p *ngFor="let product of discountedList">
+    <app-product-card [product]="product"></app-product-card>
+  </p>
+</div>

@@ -9,9 +9,13 @@ import { ProductServiceService } from 'src/app/service/product-service.service';
 })
 export class HomeComponent implements OnInit {
   
-  // Ez Product lista, ami szolgáltatja az adatokat a Service-ből
-  productList: Product[] = this.ProductServiceService.list;
+  featuredFilmsList: Product[] = this.ProductServiceService.featuredFilmsList
+    .sort(index => Math.random() - 0.5)
+    .slice(0, 5);
 
+  discountedList: Product[] = this.ProductServiceService.discountedList
+    .sort(index => Math.random() - 0.5)
+    .slice(0, 5);
 
   constructor(private ProductServiceService: ProductServiceService) { }
 
