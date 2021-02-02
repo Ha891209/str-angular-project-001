@@ -18,7 +18,7 @@
 </div>
 
 <div class="all-product-container">
-  <p *ngFor="let product of filmListVisible">
+  <p *ngFor="let product of filmList | filter:phrase:'name'">
     <app-product-card [product]="product"></app-product-card>
   </p>
 </div>
