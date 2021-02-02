@@ -1,10 +1,8 @@
 <h1 class="text-center mb-4 mt-5">Rajzfilmek</h1>      
-
 <h2 class="text-center mb-5 mt-5">Kiemelt termékek</h2>
-<div class="all-product-container">
-  <p *ngFor="let product of featuredCartoonsList">
-    <app-product-card [product]="product"></app-product-card>
-  </p>
+
+<div class="product-container">
+  <app-product-card [product]="product" *ngFor="let product of featuredCartoonsList"></app-product-card>
 </div>
 
 <hr>
@@ -18,8 +16,6 @@
   </form>
 </div>
 
-<div class="all-product-container">
-  <p *ngFor="let product of cartoonList | filter:phrase:'name'">
-    <app-product-card [product]="product"></app-product-card>
-  </p>
+<div class="product-container">
+  <app-product-card [product]="product" *ngFor="let product of cartoonList | filter:phrase:'name'"></app-product-card>
 </div>
