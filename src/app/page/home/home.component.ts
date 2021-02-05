@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product';
-import { ProductServiceService } from 'src/app/service/product-service.service';
+import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +9,15 @@ import { ProductServiceService } from 'src/app/service/product-service.service';
 })
 export class HomeComponent implements OnInit {
   
-  featuredFilmsList: Product[] = this.ProductServiceService.featuredFilmsList
+  featuredFilmsList: Product[] = this.ProductService.featuredFilmsList
     .sort(index => Math.random() - 0.5)
     .slice(0, 5);
 
-  discountedList: Product[] = this.ProductServiceService.discountedList
+  discountedList: Product[] = this.ProductService.discountedList
     .sort(index => Math.random() - 0.5)
     .slice(0, 5);
 
-  constructor(private ProductServiceService: ProductServiceService) { }
+  constructor(private ProductService: ProductService) { }
 
   ngOnInit(): void {
   }

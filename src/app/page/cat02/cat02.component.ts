@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product';
-import { ProductServiceService } from 'src/app/service/product-service.service';
+import { ProductService } from 'src/app/service/product.service';
 
 @Component({
   selector: 'app-cat02',
@@ -11,9 +11,9 @@ export class Cat02Component implements OnInit {
 
   phrase: string = '';
 
-  cartoonList: Product[] = this.ProductServiceService.cartoonList;
+  cartoonList: Product[] = this.ProductService.cartoonList;
 
-  featuredCartoonsList: Product[] = this.ProductServiceService.featuredCartoonsList
+  featuredCartoonsList: Product[] = this.ProductService.featuredCartoonsList
     .sort(() => Math.random() - 0.5)
     .slice(0, 5);
 
@@ -21,7 +21,7 @@ export class Cat02Component implements OnInit {
     this.phrase = (event.target as HTMLInputElement).value;
   }
 
-  constructor(private ProductServiceService: ProductServiceService) { }
+  constructor(private ProductService: ProductService) { }
 
   ngOnInit(): void {
   }

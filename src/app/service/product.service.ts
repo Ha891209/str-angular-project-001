@@ -4,7 +4,7 @@ import { Product } from '../model/product';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductServiceService {
+export class ProductService {
 
   list: Product[] = [
     {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from './model/product';
-import { ProductServiceService } from './service/product-service.service';
+import { ProductService } from './service/product.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,6 @@ import { ProductServiceService } from './service/product-service.service';
 })
 export class AppComponent {
   title = 'str-angular-project001';
-  productList: Product[] = this.ProductServiceService.list;
-  constructor(private ProductServiceService: ProductServiceService) {}
+  productList: Product[] = this.ProductService.list;
+  constructor(private ProductService: ProductService) {}
 }
