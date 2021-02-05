@@ -17,6 +17,7 @@ export class ConfigService {
     {text: 'Kezdőlap', link: '/', icon: 'home'},
     {text: 'Filmek', link: '/filmek'},
     {text: 'Rajzfilmek', link: '/rajzfilmek'},
+    {text: 'Admin', link: '/admin'},
   ];
 
   constructor() {}
