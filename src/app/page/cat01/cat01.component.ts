@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { ProductService } from '../../service/product.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cat01',
@@ -9,19 +10,17 @@ import { ProductService } from '../../service/product.service';
 })
 export class Cat01Component implements OnInit {
 
+  constructor(private ProductService: ProductService) { }
+
   phrase: string = '';
 
-  filmList: Product[] = this.ProductService.getFilmList();
-
+  productList$: Observable<Product[]> = this.ProductService.getAll();
   featuredFilmsList: Product[] = this.ProductService.getFeaturedFilmList(true);
-    
-
-  constructor(private ProductService: ProductService) { }
 
   onChangePhrase(event: Event): void {
     this.phrase = (event.target as HTMLInputElement).value;
   }
-
+  
   ngOnInit(): void { }
 
 }

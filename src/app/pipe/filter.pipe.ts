@@ -10,8 +10,8 @@ export class FilterPipe implements PipeTransform {
     !Array.isArray(value) || !key || !phrase ? value : null;
 
     return value.filter(item => {
-      typeof item[key] === 'number' && typeof phrase === 'number' ? item[key] === phrase : null;
-      return String(item[key]).toLowerCase().includes(String(phrase).toLowerCase());
+      typeof item[key] === 'number' && typeof phrase === 'number' ? item[key] === phrase : null;      
+      return String(item[key]).toLowerCase().includes(String(phrase).toLowerCase());      
     });
   }
 }

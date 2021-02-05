@@ -12,6 +12,8 @@ import { ProductCardComponent } from './common/product-card/product-card.compone
 import { FilterPipe } from './pipe/filter.pipe';
 import { AdminComponent } from './admin/admin.component';
 import { DataEditorComponent } from './data-editor/data-editor.component';
+import { FilmsPipe } from './pipe/films.pipe';
+import { CartoonsPipe } from './pipe/cartoons.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { DataEditorComponent } from './data-editor/data-editor.component';
     FilterPipe,
     AdminComponent,
     DataEditorComponent,
+    FilmsPipe,
+    CartoonsPipe,
   ],
   imports: [
     BrowserModule,

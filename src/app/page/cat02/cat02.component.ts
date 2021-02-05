@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/model/product';
 import { ProductService } from 'src/app/service/product.service';
 
@@ -9,17 +10,16 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class Cat02Component implements OnInit {
 
+  constructor(private ProductService: ProductService) { }
+
   phrase: string = '';
 
-  cartoonList: Product[] = this.ProductService.getCartoonList();
-
+  productList$: Observable<Product[]> = this.ProductService.getAll();
   featuredCartoonsList: Product[] = this.ProductService.getFeaturedCartoonList(true);
 
   onChangePhrase(event: Event): void {
     this.phrase = (event.target as HTMLInputElement).value;
   }
-
-  constructor(private ProductService: ProductService) { }
 
   ngOnInit(): void {
   }

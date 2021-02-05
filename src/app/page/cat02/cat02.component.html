@@ -17,5 +17,5 @@
 </div>
 
 <div class="product-container">
-  <app-product-card [product]="product" *ngFor="let product of cartoonList"></app-product-card>
+  <app-product-card [product]="product" *ngFor="let product of productList$ | async | cartoons | filter:phrase:'name'"></app-product-card>
 </div>

@@ -24,22 +24,6 @@ export class ProductService {
     return this.http.delete(`${this.serverUrl}/${product.id}`);
   }
 
-  getFilmList(): Product[] {
-    const filmList = [];
-    this.getAll().subscribe(
-      products => products.forEach(product => product.catId === 1 ? filmList.push(product) : null),
-      error => console.error(error));
-    return filmList;
-  }
-
-  getCartoonList(): Product[] {
-    const cartoonList = [];
-    this.getAll().subscribe(
-      products => products.forEach(product => product.catId === 2 ? cartoonList.push(product) : null),
-      error => console.error(error));
-    return cartoonList;
-  }
-
   getDiscountedList(randomization?: boolean): Product[] {
     const discountedList = [];
     this.getAll().subscribe(
