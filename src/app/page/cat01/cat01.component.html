@@ -2,7 +2,7 @@
 <h2 class="text-center mb-5 mt-5">Kiemelt termékek</h2>
 
 <div class="product-container">
-  <app-product-card [product]="product" *ngFor="let product of featuredFilmsList"></app-product-card>
+  <app-product-card [product]="product" *ngFor="let product of featuredFilmsList | slice:0:5"></app-product-card>
 </div>
 
 <hr>
@@ -17,5 +17,5 @@
 </div>
 
 <div class="product-container">
-  <app-product-card [product]="product" *ngFor="let product of filmList | filter:phrase:'name'"></app-product-card>
+  <app-product-card [product]="product" *ngFor="let product of filmList"></app-product-card>
 </div>

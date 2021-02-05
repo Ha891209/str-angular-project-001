@@ -11,11 +11,10 @@ export class Cat01Component implements OnInit {
 
   phrase: string = '';
 
-  filmList: Product[] = this.ProductService.filmList;
+  filmList: Product[] = this.ProductService.getFilmList();
 
-  featuredFilmsList: Product[] = this.ProductService.featuredFilmsList
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 5);
+  featuredFilmsList: Product[] = this.ProductService.getFeaturedFilmList(true);
+    
 
   constructor(private ProductService: ProductService) { }
 

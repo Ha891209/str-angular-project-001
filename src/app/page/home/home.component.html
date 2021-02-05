@@ -2,7 +2,7 @@
 
 <h2>Kiemelt termékek</h2>
 <div class="all-product-container">
-  <p *ngFor="let product of featuredFilmsList">
+  <p *ngFor="let product of featuredFilmList | slice:0:5">
     <app-product-card [product]="product"></app-product-card>
   </p>
 </div>
@@ -11,7 +11,7 @@
 
 <h2>Akciós termékek</h2>
 <div class="all-product-container">
-  <p *ngFor="let product of discountedList">
+  <p *ngFor="let product of discountedList | slice:0:5">
     <app-product-card [product]="product"></app-product-card>
   </p>
 </div>

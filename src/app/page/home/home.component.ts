@@ -9,17 +9,12 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class HomeComponent implements OnInit {
   
-  featuredFilmsList: Product[] = this.ProductService.featuredFilmsList
-    .sort(index => Math.random() - 0.5)
-    .slice(0, 5);
+  constructor(private productService: ProductService) { }
 
-  discountedList: Product[] = this.ProductService.discountedList
-    .sort(index => Math.random() - 0.5)
-    .slice(0, 5);
+  featuredFilmList: Product[] = this.productService.getFeaturedFilmList(true);
+  discountedList: Product[] = this.productService.getDiscountedList(true);
 
-  constructor(private ProductService: ProductService) { }
-
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
 }

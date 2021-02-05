@@ -11,11 +11,9 @@ export class Cat02Component implements OnInit {
 
   phrase: string = '';
 
-  cartoonList: Product[] = this.ProductService.cartoonList;
+  cartoonList: Product[] = this.ProductService.getCartoonList();
 
-  featuredCartoonsList: Product[] = this.ProductService.featuredCartoonsList
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 5);
+  featuredCartoonsList: Product[] = this.ProductService.getFeaturedCartoonList(true);
 
   onChangePhrase(event: Event): void {
     this.phrase = (event.target as HTMLInputElement).value;
