@@ -14,11 +14,12 @@ export class ConfigService {
   appName: string = 'Film webshop';
 
   menuItems: IMenuItem[] = [
-    {text: 'Kezdőlap', link: '/', icon: 'home'},
-    {text: 'Filmek', link: '/filmek'},
-    {text: 'Rajzfilmek', link: '/rajzfilmek'},
-    {text: 'Admin', link: '/admin'},
+    { text: 'Kezdőlap', link: '/', icon: 'home' },
+    { text: 'Filmek', link: '/filmek' },
+    { text: 'Rajzfilmek', link: '/rajzfilmek' },
+    { text: 'Admin', link: '/admin' },
   ];
+  tableCols: any[];
 
-  constructor() {}
+  constructor() { }
 }

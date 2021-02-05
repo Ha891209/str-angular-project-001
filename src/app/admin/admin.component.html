@@ -1,2 +1,12 @@
-<p>admin works!</p>
-<app-data-editor></app-data-editor>
+  
+<div class="input">
+    <form class="form-inline my-2 my-lg-0">
+        <input (keyup)="onChangePhrase($event)" class="form-control mr-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+</div>
+
+
+<app-data-editor (updateClick)="onUpdate($event)" (deleteClick)="onDelete($event)" [phrase]="phrase"
+    [productList$]="productList$">
+</app-data-editor>

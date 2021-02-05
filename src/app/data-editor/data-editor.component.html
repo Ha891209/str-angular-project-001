@@ -1,1 +1,32 @@
-<p>data-editor works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th *ngFor="let col of cols">{{ col.text }}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productList$ | async | filter:phrase:'title'">
+              <td *ngFor="let col of cols">
+                <input *ngIf="col.editable" [(ngModel)]="product[col.key]" type="text" class="form-control">
+                <span *ngIf="!col.editable">{{ product[col.key] }}</span>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <button (click)="onUpdate(product)" class="btn btn-info">
+                    <i class="fa fa-refresh"></i>
+                  </button>
+                  <button (click)="onDelete(product)" class="btn btn-danger">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
