@@ -9,6 +9,8 @@ import { Cat02Component } from './page/cat02/cat02.component';
 import { HomeComponent } from './page/home/home.component';
 import { ProductCardComponent } from './common/product-card/product-card.component';
 import { FilterPipe } from './pipe/filter.pipe';
+import { AdminComponent } from './admin/admin.component';
+import { DataEditorComponent } from './data-editor/data-editor.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     HomeComponent,
     ProductCardComponent,
     FilterPipe,
+    AdminComponent,
+    DataEditorComponent,
   ],
   imports: [
     BrowserModule,
