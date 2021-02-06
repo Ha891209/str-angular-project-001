@@ -14,6 +14,9 @@ import { AdminComponent } from './admin/admin.component';
 import { DataEditorComponent } from './data-editor/data-editor.component';
 import { FilmsPipe } from './pipe/films.pipe';
 import { CartoonsPipe } from './pipe/cartoons.pipe';
+import { IconComponent } from './common/icon/icon.component';
+import { ActionButtonComponent } from './common/action-button/action-button.component';
+import { ActionButtonGroupComponent } from './common/action-button-group/action-button-group.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { CartoonsPipe } from './pipe/cartoons.pipe';
     DataEditorComponent,
     FilmsPipe,
     CartoonsPipe,
+    IconComponent,
+    ActionButtonComponent,
+    ActionButtonGroupComponent,
   ],
   imports: [
     BrowserModule,

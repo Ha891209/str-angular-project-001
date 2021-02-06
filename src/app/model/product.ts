@@ -9,6 +9,7 @@ export class Product {
   featured: boolean;
   discounted: boolean;
   active: boolean;
+  action: any;
 
   constructor(properties?: Product) {
     if (properties) {

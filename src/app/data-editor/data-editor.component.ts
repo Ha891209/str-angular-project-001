@@ -14,10 +14,23 @@ export class DataEditorComponent implements OnInit {
 
   @Input() productList$: Observable<Product[]>;
   @Input() phrase: string = '';
+  @Output() selectClick: EventEmitter<Product> = new EventEmitter();
   @Output() updateClick: EventEmitter<Product> = new EventEmitter();
   @Output() deleteClick: EventEmitter<Product> = new EventEmitter();
   cols: IMenuItem[] = this.config.tableCols;
-  selectClick: any;
+  col: Product = new Product();
+
+  onSelectClicked(): void {
+    this.selectClick.emit(this.col);
+  }
+
+  onUpdateClicked(): void {
+    this.updateClick.emit(this.col);
+  }
+
+  onDeleteClicked(): void {
+    this.deleteClick.emit(this.col);
+  }
 
   constructor(
     private config: ConfigService,
@@ -27,11 +40,10 @@ export class DataEditorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onUpdate(product: Product): void {
-    this.updateClick.emit(product);
+  searchEvent(event: Event): void {
+    this.phrase = (event.target as HTMLInputElement).value;
   }
 
-  onDelete(product: Product): void {
-    this.deleteClick.emit(product);
-  }
 }
+
+
