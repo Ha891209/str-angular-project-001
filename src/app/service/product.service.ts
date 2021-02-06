@@ -16,12 +16,12 @@ export class ProductService {
     return this.http.get<Product[]>(this.serverUrl);
   }
 
-  update(product: Product): Observable<any> {
-    return this.http.put(`${this.serverUrl}/${product.id}`, product);
+  update(product: Product): Observable<Product> {
+    return this.http.patch<Product>(`${this.serverUrl}/${product.id}`, product);
   }
 
-  remove(product: Product): Observable<any> {
-    return this.http.delete(`${this.serverUrl}/${product.id}`);
+  remove(product: Product): Observable<Product> {
+    return this.http.delete<Product>(`${this.serverUrl}/${product.id}`);
   }
 
   getDiscountedList(randomization?: boolean): Product[] {
