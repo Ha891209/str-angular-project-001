@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Product } from 'src/app/model/product';
-import { ConfigService, IMenuItem } from 'src/app/service/config.service';
+import { ConfigService, IMenuItem, ITableCol, } from 'src/app/service/config.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -14,22 +14,22 @@ export class DataEditorComponent implements OnInit {
 
   @Input() productList$: Observable<Product[]>;
   @Input() phrase: string = '';
-  @Output() selectClick: EventEmitter<Product> = new EventEmitter();
-  @Output() updateClick: EventEmitter<Product> = new EventEmitter();
-  @Output() deleteClick: EventEmitter<Product> = new EventEmitter();
-  cols: IMenuItem[] = this.config.tableCols;
-  col: Product = new Product();
+  @Output() onSelect: EventEmitter<Product> = new EventEmitter();
+  @Output() onUpdate: EventEmitter<Product> = new EventEmitter();
+  @Output() onDelete: EventEmitter<Product> = new EventEmitter();
+  cols: ITableCol[] = this.config.tableCols;
+  product: Product;
 
-  onSelectClicked(): void {
-    this.selectClick.emit(this.col);
+  onSelectClicked(product: Product): void {
+    this.onSelect.emit(this.product);
   }
 
-  onUpdateClicked(): void {
-    this.updateClick.emit(this.col);
+  onUpdateClicked(product: Product): void {
+    this.onUpdate.emit(this.product);
   }
 
-  onDeleteClicked(): void {
-    this.deleteClick.emit(this.col);
+  onDeleteClicked(product: Product): void {
+    this.onDelete.emit(this.product);
   }
 
   constructor(

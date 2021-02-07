@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid mt-3 d-flex justify-content-center">
   <div class="row">
     <div class="col-12">
       <form class="form-inline my-2 my-lg-0 py-2">
@@ -6,26 +6,29 @@
         <button class="btn btn-search my-2 my-sm-0" type="submit">Search</button>
       </form>
       <div class="table-responsive-sm">
-        <table class="table table-striped table-dark table-bordered table-hover table-sm">
-          <thead class="thead-dark text-center">
-            <tr>
-              <th class="text-warning font-weight-light" *ngFor="let col of cols">{{ col.text }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="pt-2" *ngFor="let col of cols">
-                <input class="input-group" type="text">
-              </td>
-              <td>
-                <app-action-button-group (selectClick)="onSelectClicked()" (updateClick)="onUpdateClicked()"
-                  (deleteClick)="onDeleteClicked()">
-                </app-action-button-group>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <table class="table table-striped table-primary table-bordered table-hover table-sm">
+           <thead>
+           <tr>
+            <th *ngFor="let col of cols">{{col.text}}</th>
+          </tr>
+        </thead>
+        <tbody>
+              <tr>
+            <td *ngFor="let product of productList$"></td>
+              </tr>
+              <div class="btn-group">
+                 <button (click)="onSelectClicked(product)" class="btn btn-info">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button (click)="onUpdateClicked(product)" class="btn  btn-secondary">
+                  <i class="fa fa-refresh"></i>
+                </button>
+                <button (click)="onDeleteClicked(product)" class="btn btn-danger">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
