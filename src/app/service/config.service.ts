@@ -28,15 +28,16 @@ export class ConfigService {
 
   tableCols: ITableCol[] = [
     { key: 'id', text: '#', editable: false },
-    { key: 'catID', text: 'CatId', editable: false },
-    { key: 'name', text: 'Name', editable: true },
-    { key: 'description', text: 'Description', editable: true },
-    { key: 'image', text: 'Image', editable: true },
-    { key: 'price', text: 'Price', editable: true },
-    { key: 'stock', text: 'Stock', editable: true },
-    { key: 'featured', text: 'Featured', editable: true },
-    { key: 'discounted', text: 'Discounted', editable: true },
-    { key: 'active', text: 'Active', editable: true },
+    { key: 'catID', text: 'Kategória ID', editable: false },
+    { key: 'name', text: 'Név', editable: true },
+    { key: 'description', text: 'Leírás', editable: true },
+    { key: 'image', text: 'Kép', editable: true },
+    { key: 'price', text: 'Ár', editable: true },
+    { key: 'stock', text: 'Készlet', editable: true },
+    { key: 'featured', text: 'Kiemelt', editable: true },
+    { key: 'discounted', text: 'Akciós', editable: true },
+    { key: 'active', text: 'Aktív', editable: true },
+    { key: 'operations', text: 'Műveletek', editable: false },
   ]
 
   constructor() { }
