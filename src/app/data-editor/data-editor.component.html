@@ -1,42 +1,39 @@
-<div class="container-fluid mt-3 d-flex justify-content-center">
+<div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-12">
-      <form class="form-inline my-2 my-lg-0 py-2">
-        <input (keyup)="searchEvent($event)" class="form-control mr-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-search my-2 my-sm-0" type="submit">Search</button>
-      </form>
-      <div class="table-responsive-sm">
-        <table class="table table-striped table-primary table-bordered table-hover table-sm">
-          <thead>
-            <tr>
-              <th *ngFor="let col of cols">{{col.text}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let product of productList$ | async">
-              <td>{{ product.id }}</td>
-              <td>{{ product.catId }}</td>
-              <td> <input class="form-control" [(ngModel)]="product.name"></td>
-              <td><input class="form-control" [(ngModel)]="product.description"></td>
-              <td><input  class="form-control" [(ngModel)]="product.image"></td>
-              <td><input class="form-control" [(ngModel)]="product.price"></td>
-              <td><input class="form-control" [(ngModel)]="product.stock"></td>
-              <td><input class="form-control" [(ngModel)]="product.featured"></td>
-              <td><input class="form-control" [(ngModel)]="product.discounted"></td>
-              <td><input  class="form-control" [(ngModel)]="product.active"></td>
-              <td>
-                <div class="btn-group">
-                  <button (click)="onUpdateClicked(product)" class="btn  btn-secondary">
-                    <i class="fa fa-refresh"></i>
-                  </button>
-                  <button (click)="onDeleteClicked(product)" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="col-12 my-5">
+      <table class="table table-striped table-primary table-bordered table-hover table-sm text-center">
+        <thead class="thead-dark">
+          <tr>
+            <th *ngFor="let col of cols">{{ col.text }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productList$ | async">
+            <td>
+              <span>{{ product.id }}</span>
+            </td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.catId"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.name"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.description"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.image"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.price"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.stock"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.featured" type="checkbox"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.discounted" type="checkbox"></td>
+            <td><input class="form-control form-control-sm" [(ngModel)]="product.active" type="checkbox"></td>
+            <td>
+              <div class="btn-group">
+                <button (click)="onUpdateClicked(product)" class="btn btn-secondary">
+                  <i class="fa fa-refresh"></i>
+                </button>
+                <button (click)="onDeleteClicked(product)" class="btn btn-danger">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>

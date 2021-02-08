@@ -28,12 +28,23 @@ export class DataEditorComponent implements OnInit {
   }
 
   onUpdateClicked(product: Product): void {
-    this.productService.update(product);
+    product.catId = Number(product.catId);
+    product.price = Number(product.price);
+    product.stock = Number(product.stock);
+    
+    this.productService.update(product).subscribe(
+      data => alert(`Termék (id: ${data.id}) sikeresen frissítve!`),
+      error => console.error(error)
+    );
     this.onUpdate.emit(product);
   }
 
   onDeleteClicked(product: Product): void {
-    this.productService.remove(product);
+    this.productService.remove(product).subscribe(
+      data => alert(`Termék (id: ${data.id}) sikeresen törölve!`),
+      error => console.error(error)
+    );
+    
     this.onDelete.emit(product);
   }
 

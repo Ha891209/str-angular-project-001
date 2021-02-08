@@ -1,14 +1,10 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
-.container {
-  width: 100vw;
-}
 
 .table {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
-  table-layout: fixed;
 }
 
-
+td {
+  text-align: center; 
+  vertical-align: middle;
+}
