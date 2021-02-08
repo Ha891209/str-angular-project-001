@@ -41,7 +41,7 @@ export class DataEditorComponent implements OnInit {
 
   onDeleteClicked(product: Product): void {
     this.productService.remove(product).subscribe(
-      data => alert(`Termék (id: ${data.id}) sikeresen törölve!`),
+      data => alert(`Termék (id: ${product.id}) sikeresen törölve!`),
       error => console.error(error)
     );
     
