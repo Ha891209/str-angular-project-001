@@ -28,10 +28,12 @@ export class DataEditorComponent implements OnInit {
   }
 
   onUpdateClicked(product: Product): void {
+    this.productService.update(product);
     this.onUpdate.emit(product);
   }
 
   onDeleteClicked(product: Product): void {
+    this.productService.remove(product);
     this.onDelete.emit(product);
   }
 
