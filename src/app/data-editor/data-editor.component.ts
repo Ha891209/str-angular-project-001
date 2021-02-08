@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { Product } from 'src/app/model/product';
 import { ConfigService, ITableCol } from 'src/app/service/config.service';
@@ -18,11 +18,12 @@ export class DataEditorComponent implements OnInit {
 
   productList$ = this.productService.getAll();
   cols: ITableCol[] = this.config.tableCols;
+  currentSelectProperty: string = 'name';
+  productProperties: string[] = Object.keys(new Product());
 
-  @Input() phrase: string = '';
+  phrase: string = '';
   @Output() onUpdate: EventEmitter<Product> = new EventEmitter();
   @Output() onDelete: EventEmitter<Product> = new EventEmitter();
-
 
   ngOnInit(): void {
   }
@@ -47,8 +48,8 @@ export class DataEditorComponent implements OnInit {
     
     this.onDelete.emit(product);
   }
-
-  searchEvent(event: Event): void {
+  
+  onChangePhrase(event: Event): void {
     this.phrase = (event.target as HTMLInputElement).value;
   }
 
