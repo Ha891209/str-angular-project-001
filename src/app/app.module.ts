@@ -18,6 +18,7 @@ import { CartoonsPipe } from './pipe/cartoons.pipe';
 import { IconComponent } from './common/icon/icon.component';
 import { ActionButtonComponent } from './common/action-button/action-button.component';
 import { ActionButtonGroupComponent } from './common/action-button-group/action-button-group.component';
+import { SorterPipe } from './pipe/sorter.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ActionButtonGroupComponent } from './common/action-button-group/action-
     IconComponent,
     ActionButtonComponent,
     ActionButtonGroupComponent,
+    SorterPipe,
   ],
   imports: [
     BrowserModule,

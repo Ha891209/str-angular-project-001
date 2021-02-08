@@ -20,8 +20,9 @@ export class DataEditorComponent implements OnInit {
   cols: ITableCol[] = this.config.tableCols;
   currentSelectProperty: string = 'name';
   productProperties: string[] = Object.keys(new Product());
-
+  sorterColumn: string = 'id';
   phrase: string = '';
+
   @Output() onUpdate: EventEmitter<Product> = new EventEmitter();
   @Output() onDelete: EventEmitter<Product> = new EventEmitter();
 
@@ -34,7 +35,7 @@ export class DataEditorComponent implements OnInit {
     product.stock = Number(product.stock);
     
     this.productService.update(product).subscribe(
-      data => alert(`Termék (id: ${data.id}) sikeresen frissítve!`),
+      data => alert(`Termék (ID: ${data.id}) sikeresen frissítve!`),
       error => console.error(error)
     );
     this.onUpdate.emit(product);
@@ -42,7 +43,7 @@ export class DataEditorComponent implements OnInit {
 
   onDeleteClicked(product: Product): void {
     this.productService.remove(product).subscribe(
-      data => alert(`Termék (id: ${product.id}) sikeresen törölve!`),
+      data => alert(`Termék (ID: ${product.id}) sikeresen törölve!`),
       error => console.error(error)
     );
     
@@ -53,6 +54,8 @@ export class DataEditorComponent implements OnInit {
     this.phrase = (event.target as HTMLInputElement).value;
   }
 
+  onClickHeader(inputCol: ITableCol): void {
+    this.sorterColumn = this.cols.find(col => col.text === inputCol["text"]).key;
+  }
+
 }
-
-

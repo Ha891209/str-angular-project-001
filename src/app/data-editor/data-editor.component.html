@@ -1,22 +1,22 @@
-<div class="container-fluid mt-3">
+<div class="container-fluid my-4">
   <div class="row">
-    <div class="col-2 offset-8 my-5">
+    <div class="col-2 offset-8 my-3">
       <select [(ngModel)]="currentSelectProperty" class="form-control">
         <option *ngFor="let property of productProperties" [value]="property">{{ property }}</option>
       </select>
     </div>
-    <div class="col-2 my-5">
-      <input type="text" placeholder="Keresés" class="form-control" (keyup)='onChangePhrase($event)'>
+    <div class="col-2 my-3">
+      <input type="text" placeholder="Keresés" class="form-control" (keyup)="onChangePhrase($event)">
     </div>
-    <div class="col-12 mb-5">
+    <div class="col-12 mb-1">
       <table class="table table-striped table-primary table-bordered table-hover table-sm text-center">
         <thead class="thead-dark">
           <tr>
-            <th *ngFor="let col of cols">{{ col.text }}</th>
+            <th *ngFor="let col of cols" (click)=onClickHeader(col)>{{ col.text }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of productList$ | async |filter:phrase:currentSelectProperty">
+          <tr *ngFor="let product of productList$ | async | filter:phrase:currentSelectProperty | sorter:sorterColumn">
             <td>
               <span>{{ product.id }}</span>
             </td>
