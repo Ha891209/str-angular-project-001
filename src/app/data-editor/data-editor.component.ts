@@ -3,6 +3,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { ConfigService, ITableCol } from 'src/app/service/config.service';
 import { ProductService } from 'src/app/service/product.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-data-editor',
@@ -22,11 +24,25 @@ export class DataEditorComponent implements OnInit {
   productProperties: string[] = Object.keys(new Product());
   sorterColumn: string = 'id';
   phrase: string = '';
+  
+  // Variables for pagination
+  productNum: number = 0;
+  allHitsNumber$: Observable<Product[]> = this.productList$.pipe(tap(products => this.productNum = products.length));
+  hitsPerPage: number = 10;
+  currentPage: number = 1;
+  lastPage: number = 0;
+  startHits: number = 0;
+  endHits: number = this.startHits + this.hitsPerPage;
+  activePageTag: HTMLElement;
 
   @Output() onUpdate: EventEmitter<Product> = new EventEmitter();
   @Output() onDelete: EventEmitter<Product> = new EventEmitter();
 
   ngOnInit(): void {
+    this.allHitsNumber$.subscribe(
+      item => null,
+      error => console.error(error)
+    );
   }
 
   onUpdateClicked(product: Product): void {
@@ -56,6 +72,53 @@ export class DataEditorComponent implements OnInit {
 
   onClickHeader(inputCol: ITableCol): void {
     this.sorterColumn = this.cols.find(col => col.text === inputCol["text"]).key;
+  }
+
+  getPageArray(): Number[] {
+    const pageArray = [];
+    for (let i = 1; i <= Math.ceil(this.productNum / this.hitsPerPage); i++) {
+      pageArray.push(i);
+    }
+    this.lastPage = pageArray[pageArray.length - 1];
+    return pageArray;
+  }
+
+  setActivePage(crntPage: Number): void {
+    const allListItems = Array.from(document.querySelectorAll('.pagination .page-item'));
+    allListItems.map(listItem => {
+      const aTag = listItem.querySelector("a");
+      if (aTag.textContent === String(crntPage)) {
+        listItem.classList.add('active');
+      } else {
+        listItem.classList.remove('active');
+      }
+    });
+  }
+
+  onPager(event: any, page: number): void {
+    Array.from(document.querySelectorAll('.pagination .page-item')).map(item => item.classList.remove('active'));
+    this.currentPage = page - 1;
+    this.startHits = this.currentPage * this.hitsPerPage;
+    this.endHits = this.startHits + this.hitsPerPage;
+    event.currentTarget.classList.add('active');
+    if (this.currentPage + 1 === this.lastPage) {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.add("disabled");
+    } else {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.remove("disabled");
+    }
+  }
+
+  getNextPage(event: Event): void {
+    this.currentPage++;
+    this.setActivePage(this.currentPage + 1);
+    this.startHits = this.currentPage * this.hitsPerPage;
+    this.endHits = this.startHits + this.hitsPerPage;
+
+    if (this.currentPage + 1 === this.lastPage) {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.add("disabled");
+    } else {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.remove("disabled");
+    }
   }
 
 }

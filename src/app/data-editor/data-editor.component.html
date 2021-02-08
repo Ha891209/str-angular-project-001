@@ -16,7 +16,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of productList$ | async | filter:phrase:currentSelectProperty | sorter:sorterColumn">
+          <tr
+            *ngFor="let product of productList$ | async | filter:phrase:currentSelectProperty | sorter:sorterColumn | slice:startHits:endHits">
             <td>
               <span>{{ product.id }}</span>
             </td>
@@ -43,5 +44,28 @@
         </tbody>
       </table>
     </div>
+
+    <div class="col-6 offset-3">
+      <nav>
+        <ul class="pagination justify-content-center">
+
+          <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true">Előző</a>
+          </li>
+
+          <span *ngFor="let page of getPageArray()">
+            <li class="page-item" (click)="onPager($event, page)">
+              <a class="page-link">{{ page }}</a>
+            </li>
+          </span>
+
+          <li class="page-item" disabled="false">
+            <a class="page-link" (click)="getNextPage($event)">Következő</a>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+
   </div>
 </div>
