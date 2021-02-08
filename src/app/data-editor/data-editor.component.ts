@@ -18,18 +18,13 @@ export class DataEditorComponent implements OnInit {
 
   productList$ = this.productService.getAll();
   cols: ITableCol[] = this.config.tableCols;
-  
+
   @Input() phrase: string = '';
-  @Output() onSelect: EventEmitter<Product> = new EventEmitter();
   @Output() onUpdate: EventEmitter<Product> = new EventEmitter();
   @Output() onDelete: EventEmitter<Product> = new EventEmitter();
- 
+
 
   ngOnInit(): void {
-  }
-
-  onSelectClicked(product: Product): void {
-    this.onSelect.emit(product);
   }
 
   onUpdateClicked(product: Product): void {

@@ -16,19 +16,16 @@
             <tr *ngFor="let product of productList$ | async">
               <td>{{ product.id }}</td>
               <td>{{ product.catId }}</td>
-              <td>{{ product.name }}</td>
-              <td>{{ product.description }}</td>
-              <td>{{ product.image }}</td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.stock }}</td>
-              <td>{{ product.featured }}</td>
-              <td>{{ product.discounted }}</td>
-              <td>{{ product.active }}</td>
+              <td> <input class="form-control" value="{{product.name}}"></td>
+              <td><input class="form-control" value="{{ product.description }}"></td>
+              <td><input  class="form-control" value="{{ product.image }}"></td>
+              <td><input class="form-control" value="{{ product.price }}"></td>
+              <td><input class="form-control" value="{{ product.stock }}"></td>
+              <td><input class="form-control" value="{{ product.featured }}"></td>
+              <td><input class="form-control" value="{{ product.discounted }}"></td>
+              <td><input  class="form-control" value="{{ product.active }}"></td>
               <td>
                 <div class="btn-group">
-                  <button (click)="onSelectClicked(product)" class="btn btn-info">
-                    <i class="fa fa-eye"></i>
-                  </button>
                   <button (click)="onUpdateClicked(product)" class="btn  btn-secondary">
                     <i class="fa fa-refresh"></i>
                   </button>
