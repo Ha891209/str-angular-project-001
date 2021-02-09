@@ -170,5 +170,11 @@ export class DataEditorComponent implements OnInit {
       (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.remove("disabled")
     }
 
+    if (this.currentPage === this.lastPage) {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.add("disabled");
+    } else {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.remove("disabled");
+    }
+
   }
 }
