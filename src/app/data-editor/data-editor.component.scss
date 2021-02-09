@@ -16,3 +16,6 @@ th {
 .pagination a {
   cursor: pointer;
 }
+.pagination li {
+  user-select: none;
+}

@@ -50,7 +50,7 @@
         <ul class="pagination justify-content-center">
 
           <li class="page-item disabled">
-            <a class="page-link" tabindex="-1" aria-disabled="true">Előző</a>
+            <a class="page-link" aria-disabled="true" (click)="getPreviousPage($event)">Előző</a>
           </li>
 
           <span *ngFor="let page of getPageArray()">

@@ -16,7 +16,8 @@ export class DataEditorComponent implements OnInit {
   constructor(
     private config: ConfigService,
     private productService: ProductService
-  ) { }
+  ) {
+   }
 
   productList$ = this.productService.getAll();
   cols: ITableCol[] = this.config.tableCols;
@@ -80,6 +81,7 @@ export class DataEditorComponent implements OnInit {
       pageArray.push(i);
     }
     this.lastPage = pageArray[pageArray.length - 1];
+    this.setActivePage(this.currentPage);
     return pageArray;
   }
 
@@ -96,29 +98,77 @@ export class DataEditorComponent implements OnInit {
   }
 
   onPager(event: any, page: number): void {
-    Array.from(document.querySelectorAll('.pagination .page-item')).map(item => item.classList.remove('active'));
-    this.currentPage = page - 1;
-    this.startHits = this.currentPage * this.hitsPerPage;
-    this.endHits = this.startHits + this.hitsPerPage;
-    event.currentTarget.classList.add('active');
-    if (this.currentPage + 1 === this.lastPage) {
+    this.currentPage = page;
+
+    if (this.currentPage === 1) {
+      this.startHits = 0;
+      this.endHits = 10;
+    } else {
+      this.startHits = (this.currentPage - 1) * this.hitsPerPage;
+      this.endHits = this.startHits + this.hitsPerPage;
+    }
+
+    this.setActivePage(this.currentPage);
+
+    if (this.currentPage === this.lastPage) {
       (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.add("disabled");
     } else {
       (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.remove("disabled");
+    }
+
+    if (this.currentPage === 1) {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.add("disabled")
+    } else {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.remove("disabled")
     }
   }
 
   getNextPage(event: Event): void {
     this.currentPage++;
-    this.setActivePage(this.currentPage + 1);
-    this.startHits = this.currentPage * this.hitsPerPage;
-    this.endHits = this.startHits + this.hitsPerPage;
 
-    if (this.currentPage + 1 === this.lastPage) {
+    if (this.currentPage === 1) {
+      this.startHits = 0;
+      this.endHits = 10;
+    } else {
+      this.startHits = (this.currentPage - 1) * this.hitsPerPage;
+      this.endHits = this.startHits + this.hitsPerPage;
+    }
+    
+    this.setActivePage(this.currentPage);
+
+    if (this.currentPage === this.lastPage) {
       (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.add("disabled");
     } else {
       (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.remove("disabled");
     }
+
+    if (this.currentPage === 1) {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.add("disabled")
+    } else {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.remove("disabled")
+    }
+
+    
   }
 
+  getPreviousPage(event: Event): void {
+    this.currentPage--;
+
+    if (this.currentPage === 1) {
+      this.startHits = 0;
+      this.endHits = 10;
+    } else {
+      this.startHits = (this.currentPage - 1) * this.hitsPerPage;
+      this.endHits = this.startHits + this.hitsPerPage;
+    }
+    
+    this.setActivePage(this.currentPage);
+
+    if (this.currentPage === 1) {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.add("disabled")
+    } else {
+      (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.remove("disabled")
+    }
+
+  }
 }
