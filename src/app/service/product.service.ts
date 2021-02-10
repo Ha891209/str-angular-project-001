@@ -19,6 +19,12 @@ export class ProductService {
     );
   }
 
+  create(product: Product): void {
+    this.http.post<Product>(this.serverUrl, product).subscribe(
+      () => this.getAll()
+    );
+  }
+
   update(product: Product): void {
     this.http.patch<Product>(`${this.serverUrl}/${product.id}`, product).subscribe(
       () => this.getAll()

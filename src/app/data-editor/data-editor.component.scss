@@ -19,3 +19,17 @@ th {
 .pagination li {
   user-select: none;
 }
+
+.new-product {
+  border: 1px solid #333;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background-color: beige;
+}
+
+.new-product span {
+  margin-right: 1.5rem;
+}
+.new-product label {
+  margin-left: .3rem;
+}

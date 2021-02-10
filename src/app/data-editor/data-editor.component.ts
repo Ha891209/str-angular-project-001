@@ -5,6 +5,7 @@ import { ConfigService, ITableCol } from 'src/app/service/config.service';
 import { ProductService } from 'src/app/service/product.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-data-editor',
@@ -197,5 +198,25 @@ export class DataEditorComponent implements OnInit {
       (event.currentTarget as HTMLElement).parentElement.parentElement.lastElementChild.classList.remove("disabled");
     }
 
+  }
+
+  submitNewUser(event: Event): void {
+    const inputFields = Array.from((event.target as HTMLElement).parentElement.querySelectorAll("input"));
+    const catId = Number(inputFields[0].value);
+    const name = inputFields[1].value;
+    const description = inputFields[2].value;
+    const image = inputFields[3].value;
+    const price = Number(inputFields[4].value);
+    const stock = Number(inputFields[5].value);
+    const featured = inputFields[6].checked;
+    const discounted = inputFields[7].checked;
+    const active = inputFields[8].checked;
+    const newProductObj = {catId, name, description, image, price, stock, featured, discounted, active};
+    this.productService.create(newProductObj);
+    inputFields.forEach(item => { 
+      if (item.type === 'text' || item.type === 'number') item.value = '';
+      else item.checked = false;
+    });
+    inputFields[inputFields.length - 1].checked = true;
   }
 }

@@ -8,6 +8,22 @@
     <div class="col-2 my-3">
       <input type="text" placeholder="Keresés" class="form-control" (keyup)="onChangePhrase($event)">
     </div>
+    
+    
+    <div class="col-12 d-flex new-product">
+      <div class="col-1"><input type="number" class="form-control form-control-sm" placeholder="Kategória ID"></div>
+      <div class="col-2"><input type="text" class="form-control form-control-sm" placeholder="Név"></div>
+      <div class="col-2"><input type="text" class="form-control form-control-sm" placeholder="Leírás"></div>
+      <div class="col-2"><input type="text" class="form-control form-control-sm" placeholder="Kép"></div>
+      <div class="col-1"><input type="number" class="form-control form-control-sm" placeholder="Ár"></div>
+      <div class="col-1"><input type="number" class="form-control form-control-sm" placeholder="Készlet"></div>
+      <span><input type="checkbox" id="featured-checkbox"><label for="featured-checkbox">Kiemelt</label></span>
+      <span><input type="checkbox" id="discounted-checkbox"><label for="discounted-checkbox">Akciós</label></span>
+      <span><input type="checkbox" id="active-checkbox" checked><label for="active-checkbox">Aktív</label></span>
+      <button class="btn btn-primary" (click)="submitNewUser($event)">Felvitel</button>
+    </div>
+
+
     <div class="col-12 mb-1">
       <table class="table table-striped table-primary table-bordered table-hover table-sm text-center">
         <thead class="thead-dark">
