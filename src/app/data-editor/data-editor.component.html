@@ -17,7 +17,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let product of productList$ | async | filter:phrase:currentSelectProperty | sorter:sorterColumn | slice:startHits:endHits">
+            *ngFor="let product of productList$ | async | filter:phrase:currentSelectProperty:productsProperties | sorter:sortedColumn:sortedOrder | slice:startHits:endHits">
             <td>
               <span>{{ product.id }}</span>
             </td>

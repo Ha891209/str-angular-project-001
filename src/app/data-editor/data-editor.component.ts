@@ -17,18 +17,20 @@ export class DataEditorComponent implements OnInit {
     private config: ConfigService,
     private productService: ProductService
   ) {
-   }
+  }
 
-  productList$ = this.productService.getAll();
+  productList$ = this.productService.list$
   cols: ITableCol[] = this.config.tableCols;
   currentSelectProperty: string = 'name';
   productProperties: string[] = Object.keys(new Product());
-  sorterColumn: string = 'id';
+  sortedOrder = 'ASC';
+  sortedColumn = 'id';
+  sortedCount = 0;
   phrase: string = '';
-  
+
   // Variables for pagination
-  productNum: number = 0;
-  allHitsNumber$: Observable<Product[]> = this.productList$.pipe(tap(products => this.productNum = products.length));
+  productsProperties: { count: number } = { count: 0 };
+  allHitsNumber$: Observable<Product[]> = this.productList$.pipe(tap(products => this.productsProperties.count = products.length));
   hitsPerPage: number = 10;
   currentPage: number = 1;
   lastPage: number = 0;
@@ -40,6 +42,8 @@ export class DataEditorComponent implements OnInit {
   @Output() onDelete: EventEmitter<Product> = new EventEmitter();
 
   ngOnInit(): void {
+    this.productService.getAll();
+
     this.allHitsNumber$.subscribe(
       item => null,
       error => console.error(error)
@@ -50,34 +54,48 @@ export class DataEditorComponent implements OnInit {
     product.catId = Number(product.catId);
     product.price = Number(product.price);
     product.stock = Number(product.stock);
-    
-    this.productService.update(product).subscribe(
-      data => alert(`Termék (ID: ${data.id}) sikeresen frissítve!`),
-      error => console.error(error)
-    );
+    this.productService.update(product);
     this.onUpdate.emit(product);
   }
 
   onDeleteClicked(product: Product): void {
-    this.productService.remove(product).subscribe(
-      data => alert(`Termék (ID: ${product.id}) sikeresen törölve!`),
-      error => console.error(error)
-    );
-    
+    this.productService.remove(product);
     this.onDelete.emit(product);
   }
-  
+
   onChangePhrase(event: Event): void {
     this.phrase = (event.target as HTMLInputElement).value;
+
+    const firstPageButton = document.querySelector("ul.pagination span li") as HTMLElement;
+    firstPageButton.click();
+
+    if (this.productsProperties.count >= this.hitsPerPage * 2) {
+      const previousAndNextButtons = Array.from(document.querySelectorAll("ul.pagination > li"));
+      previousAndNextButtons.map(item => item.classList.remove('disabled'));
+    }
+
+    if (this.currentPage === 1) {
+      const previousButton = document.querySelector("ul.pagination > li");
+      previousButton.classList.add('disabled');
+    }
+    if (this.hitsPerPage * 2) {
+      const nextButton = document.querySelectorAll("ul.pagination > li")[1];
+      nextButton.classList.remove('disabled');
+    }
   }
 
   onClickHeader(inputCol: ITableCol): void {
-    this.sorterColumn = this.cols.find(col => col.text === inputCol["text"]).key;
+    if (this.sortedCount !== 0) {
+      if (this.sortedOrder === 'ASC') this.sortedOrder = 'DESC'
+      else this.sortedOrder = 'ASC'
+    }
+    this.sortedColumn = this.cols.find(col => col.text === inputCol["text"]).key;
+    this.sortedCount++;
   }
 
   getPageArray(): Number[] {
     const pageArray = [];
-    for (let i = 1; i <= Math.ceil(this.productNum / this.hitsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(this.productsProperties.count / this.hitsPerPage); i++) {
       pageArray.push(i);
     }
     this.lastPage = pageArray[pageArray.length - 1];
@@ -85,7 +103,7 @@ export class DataEditorComponent implements OnInit {
     return pageArray;
   }
 
-  setActivePage(crntPage: Number): void {
+  setActivePage(crntPage: number): void {
     const allListItems = Array.from(document.querySelectorAll('.pagination .page-item'));
     allListItems.map(listItem => {
       const aTag = listItem.querySelector("a");
@@ -95,6 +113,11 @@ export class DataEditorComponent implements OnInit {
         listItem.classList.remove('active');
       }
     });
+
+    if (this.productsProperties.count <= this.hitsPerPage) {
+      const previousAndNextButtons = Array.from(document.querySelectorAll("ul.pagination > li"));
+      previousAndNextButtons.map(item => item.classList.add('disabled'));
+    }
   }
 
   onPager(event: any, page: number): void {
@@ -102,7 +125,7 @@ export class DataEditorComponent implements OnInit {
 
     if (this.currentPage === 1) {
       this.startHits = 0;
-      this.endHits = 10;
+      this.endHits = this.hitsPerPage;
     } else {
       this.startHits = (this.currentPage - 1) * this.hitsPerPage;
       this.endHits = this.startHits + this.hitsPerPage;
@@ -128,12 +151,12 @@ export class DataEditorComponent implements OnInit {
 
     if (this.currentPage === 1) {
       this.startHits = 0;
-      this.endHits = 10;
+      this.endHits = this.hitsPerPage;
     } else {
       this.startHits = (this.currentPage - 1) * this.hitsPerPage;
       this.endHits = this.startHits + this.hitsPerPage;
     }
-    
+
     this.setActivePage(this.currentPage);
 
     if (this.currentPage === this.lastPage) {
@@ -147,8 +170,6 @@ export class DataEditorComponent implements OnInit {
     } else {
       (event.currentTarget as HTMLElement).parentElement.parentElement.firstElementChild.classList.remove("disabled")
     }
-
-    
   }
 
   getPreviousPage(event: Event): void {
@@ -156,12 +177,12 @@ export class DataEditorComponent implements OnInit {
 
     if (this.currentPage === 1) {
       this.startHits = 0;
-      this.endHits = 10;
+      this.endHits = this.hitsPerPage;
     } else {
       this.startHits = (this.currentPage - 1) * this.hitsPerPage;
       this.endHits = this.startHits + this.hitsPerPage;
     }
-    
+
     this.setActivePage(this.currentPage);
 
     if (this.currentPage === 1) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../model/product';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,24 +9,32 @@ import { Observable } from 'rxjs';
 export class ProductService {
 
   private serverUrl: string = 'http://localhost:3000/products';
+  list$: Subject<Product[]> = new Subject();
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.serverUrl);
+  getAll(): void {
+    this.http.get<Product[]>(this.serverUrl).subscribe(
+      products => this.list$.next(products)
+    );
   }
 
-  update(product: Product): Observable<Product> {
-    return this.http.patch<Product>(`${this.serverUrl}/${product.id}`, product);
+  update(product: Product): void {
+    this.http.patch<Product>(`${this.serverUrl}/${product.id}`, product).subscribe(
+      () => this.getAll()
+    );
   }
 
-  remove(product: Product): Observable<Product> {
-    return this.http.delete<Product>(`${this.serverUrl}/${product.id}`);
+  remove(product: Product): void {
+    this.http.delete<Product>(`${this.serverUrl}/${product.id}`).subscribe(
+      () => this.getAll()
+    );
   }
 
   getDiscountedList(randomization?: boolean): Product[] {
     const discountedList = [];
-    this.getAll().subscribe(
+    this.getAll();
+    this.list$.subscribe(
       products => products.forEach(product => product.discounted ? discountedList.push(product) : null),
       error => console.error(error),
       () => {
@@ -37,7 +45,8 @@ export class ProductService {
 
   getFeaturedFilmList(randomization?: boolean): Product[] {
     const featuredFilmList = [];
-    this.getAll().subscribe(
+    this.getAll();
+    this.list$.subscribe(
       products => products.forEach(product => product.catId === 1 && product.featured ? featuredFilmList.push(product) : null),
       error => console.error(error),
       () => {
@@ -48,7 +57,8 @@ export class ProductService {
 
   getFeaturedCartoonList(randomization?: boolean): Product[] {
     const featuredCartoonList = [];
-    this.getAll().subscribe(
+    this.getAll();
+    this.list$.subscribe(
       products => products.forEach(product => product.catId === 2 && product.featured ? featuredCartoonList.push(product) : null),
       error => console.error(error),
       () => {

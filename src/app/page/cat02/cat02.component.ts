@@ -14,7 +14,7 @@ export class Cat02Component implements OnInit {
 
   phrase: string = '';
 
-  productList$: Observable<Product[]> = this.ProductService.getAll();
+  productList$: Observable<Product[]> = this.ProductService.list$;
   featuredCartoonsList: Product[] = this.ProductService.getFeaturedCartoonList(true);
 
   onChangePhrase(event: Event): void {
